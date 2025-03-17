@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Sistema Empresa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex transition-colors duration-300" id="body">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-[#0a1f33] text-white shadow-xl flex flex-col p-4 relative">
+
+        <!-- Foto e nome do usuário -->
+        <div class="flex flex-col items-center mb-6">
+            <img src="../../img/celso.jpg" alt="Foto do Usuário" class="w-24 h-24 rounded-full border-4 border-white shadow-md">
+            <h2 id="user-name" class="text-lg font-semibold mt-3">Usuário</h2>
+            <p id="current-date" class="text-gray-300 text-sm mt-1">--/--/----</p>
+            <p id="current-time" class="text-gray-300 text-sm">--:--</p>
+        </div>
+
+        <!-- Menu com hover -->
+        <nav class="space-y-2 text-base flex-1">
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📄 Pendente</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📆 Pré-agendado</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📅 Agendado</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">⏳ Andamento</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📋 Ligações</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📞 Televendas</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">💰 Vendas</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📊 Relatórios</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">⚙️ Administrativo</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">🚚 Logística</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">🛠️ Ajustes</a>
+        </nav>
+
+        <!-- Botão modo escuro 
+        <button onclick="toggleDarkMode()" class="absolute bottom-4 left-4 bg-[#6aaeb4] hover:bg-[#5a9aa3] text-white px-4 py-2 rounded-md shadow-md transition">
+            🌙 Modo Escuro 
+        </button> -->
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-1 p-8">
+        <!-- Saudação e Data/Hora -->
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 bg-white p-6 rounded-lg shadow-md transition-colors duration-300 dark:bg-gray-800 dark:text-white">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">Bem-vindo, <span id="user-name-main" class="font-bold">Usuário</span> 👋</h1>
+            </div>
+            <div class="text-right mt-4 sm:mt-0">
+                <p id="current-datetime" class="text-lg font-semibold">--/--/---- --:--</p>
+            </div>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            <div class="bg-white p-6 rounded-md shadow hover:shadow-md transition dark:bg-gray-700 dark:text-white">
+                <h3 class="text-xl font-bold mb-2">📄 Pendente</h3>
+                <p class="text-gray-600 dark:text-gray-300">Veja as fichas pendentes aguardando ação.</p>
+            </div>
+            <div class="bg-white p-6 rounded-md shadow hover:shadow-md transition dark:bg-gray-700 dark:text-white">
+                <h3 class="text-xl font-bold mb-2">📆 Pré-agendado</h3>
+                <p class="text-gray-600 dark:text-gray-300">Consultas agendadas para os próximos dias.</p>
+            </div>
+            <div class="bg-white p-6 rounded-md shadow hover:shadow-md transition dark:bg-gray-700 dark:text-white">
+                <h3 class="text-xl font-bold mb-2">💰 Vendas</h3>
+                <p class="text-gray-600 dark:text-gray-300">Histórico de vendas e pedidos recentes.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        const userName = "Celso Portiolli"; // Nome do usuário
+        document.getElementById('user-name').innerText = userName;
+        document.getElementById('user-name-main').innerText = userName;
+
+        // Atualiza Data e Hora
+        function updateDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('pt-BR');
+            const time = now.toLocaleTimeString('pt-BR');
+            const day = now.toLocaleDateString('pt-BR', { weekday: 'long' });
+
+            document.getElementById('current-datetime').innerText = `${date} ${time}`;
+            document.getElementById('current-date').innerText = `${day}, ${date}`;
+            document.getElementById('current-time').innerText = `${time}`;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Modo escuro com preferências salvas
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.getElementById('body').classList.add('dark');
+        }
+
+        function toggleDarkMode() {
+            const body = document.getElementById('body');
+            body.classList.toggle('dark');
+            // Salva a preferência
+            if (body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+    </script>
+
+</body>
+</html>

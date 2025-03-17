@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Sistema Empresa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex transition-colors duration-300" id="body">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-[#0a1f33] text-white shadow-xl flex flex-col p-4 relative">
+
+        <!-- Foto e nome do usuário -->
+        <div class="flex flex-col items-center mb-6">
+            <img src="../../img/celso.jpg" alt="Foto do Usuário" class="w-24 h-24 rounded-full border-4 border-white shadow-md">
+            <h2 id="user-name" class="text-lg font-semibold mt-3">Usuário</h2>
+            <p id="current-date" class="text-gray-300 text-sm mt-1">--/--/----</p>
+            <p id="current-time" class="text-gray-300 text-sm">--:--</p>
+        </div>
+
+        <!-- Menu com hover -->
+        <nav class="space-y-2 text-base flex-1">
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📄 Pendente</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📆 Pré-agendado</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📅 Agendado</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">⏳ Andamento</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📋 Ligações</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📞 Televendas</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">💰 Vendas</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">📊 Relatórios</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">⚙️ Administrativo</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">🚚 Logística</a>
+            <a href="#" class="block py-3 px-4 bg-transparent hover:bg-[#6aaeb4] hover:text-white transition rounded-md">🛠️ Ajustes</a>
+        </nav>
+
+        <!-- Botão modo escuro 
+        <button onclick="toggleDarkMode()" class="absolute bottom-4 left-4 bg-[#6aaeb4] hover:bg-[#5a9aa3] text-white px-4 py-2 rounded-md shadow-md transition">
+            🌙 Modo Escuro 
+        </button> -->
+
+    </aside>
+
+     <!-- Área principal -->
+     <div class="flex-1 ml-64 p-8 overflow-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Fichas Pendentes</h2>
+            <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Adicionar Nova Ficha</button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="mb-4">
+            <label for="search" class="block text-lg">Buscar Ficha</label>
+            <input id="search" type="text" class="w-full px-4 py-2 mt-2 border rounded-md" placeholder="Digite o nome ou ID da ficha">
+        </div>
+
+        <!-- Tabela de Pendentes -->
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead>
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">ID</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Nome</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Data</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-3">#12345</td>
+                    <td class="px-6 py-3">João da Silva</td>
+                    <td class="px-6 py-3">12/03/2025</td>
+                    <td class="px-6 py-3 text-yellow-500">Pendente</td>
+                    <td class="px-6 py-3">
+                        <button class="bg-green-500 text-white py-1 px-3 rounded-md hover:bg-green-600">Aprovar</button>
+                    </td>
+                </tr>
+                <!-- Repita a linha acima para outras fichas -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        const userName = "Celso Portiolli"; // Nome do usuário
+        document.getElementById('user-name').innerText = userName;
+        document.getElementById('user-name-main').innerText = userName;
+
+        // Atualiza Data e Hora
+        function updateDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('pt-BR');
+            const time = now.toLocaleTimeString('pt-BR');
+            const day = now.toLocaleDateString('pt-BR', { weekday: 'long' });
+
+            document.getElementById('current-datetime').innerText = `${date} ${time}`;
+            document.getElementById('current-date').innerText = `${day}, ${date}`;
+            document.getElementById('current-time').innerText = `${time}`;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Modo escuro com preferências salvas
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.getElementById('body').classList.add('dark');
+        }
+
+        function toggleDarkMode() {
+            const body = document.getElementById('body');
+            body.classList.toggle('dark');
+            // Salva a preferência
+            if (body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+    </script>
+
+</body>
+</html>

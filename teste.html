@@ -1,0 +1,101 @@
+v<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichas Pendentes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex">
+        <!-- Menu Lateral -->
+        <div class="w-64 bg-blue-900 text-white min-h-screen p-5 fixed">
+            <div class="text-center mb-8">
+                <!-- Logo ou Foto do Usuário -->
+                <img src="usuario.jpg" alt="Foto do Usuário" class="rounded-full w-24 h-24 mx-auto mb-4">
+                <div class="text-lg font-semibold">João Silva</div>
+                <div class="text-sm text-gray-400" id="data-hora">Carregando data e hora...</div>
+            </div>
+            <!-- Menu -->
+            <div class="space-y-6">
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Pendente</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Pré-agendado</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Agendado</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Andamento</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Ligações</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Televendas</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Vendas</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Relatórios</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Administrativo</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Logística</a>
+                <a href="#" class="block text-white text-lg font-medium py-2 px-4 rounded-md hover:bg-[#6cafb6] hover:text-white transition-all">Ajustes</a>
+            </div>
+        </div>
+
+        <!-- Área principal -->
+        <div class="flex-1 ml-64 p-8 overflow-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Fichas Pendentes</h2>
+                <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Adicionar Nova Ficha</button>
+            </div>
+
+            <!-- Exibição de Fichas por Data e Filiais -->
+            <div class="space-y-6">
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-700 cursor-pointer p-2 bg-[#6cafb6] text-white rounded-md shadow-md" onclick="toggleFiliais('data1')">Segunda-feira, 10/03/2025</h3>
+
+                    <div id="data1" class="space-y-4 pl-4 hidden">
+                        <div class="cursor-pointer text-lg font-medium text-gray-600 p-2 rounded-md hover:bg-[#6cafb6] hover:text-white" onclick="toggleFichas('sp')">São Paulo</div>
+                        <div id="sp" class="space-y-4 pl-4 hidden">
+                            <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">ID</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Nome</th>
+                                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-600">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-3">#12345</td>
+                                        <td class="px-6 py-3">João da Silva</td>
+                                        <td class="px-6 py-3 text-yellow-500">Pendente</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Adicione mais datas e filiais conforme necessário -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function atualizarDataHora() {
+            const agora = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
+            const data = agora.toLocaleDateString('pt-BR', options);
+            const hora = agora.toLocaleTimeString('pt-BR');
+            document.getElementById('data-hora').textContent = `${data} - ${hora}`;
+        }
+
+        setInterval(atualizarDataHora, 1000);
+        atualizarDataHora(); // Chama imediatamente ao carregar
+
+        // Função para alternar a exibição de filiais
+        function toggleFiliais(dataId) {
+            const element = document.getElementById(dataId);
+            element.classList.toggle('hidden');
+        }
+
+        // Função para alternar a exibição de fichas dentro de cada filial
+        function toggleFichas(filialId) {
+            const element = document.getElementById(filialId);
+            element.classList.toggle('hidden');
+        }
+    </script>
+
+</body>
+</html>
